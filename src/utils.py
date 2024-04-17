@@ -64,22 +64,21 @@ def construct_transaction(item: dict):
         return transaction
 
 
-def main():
-    item = {
-        "id": 142264268,
-        "state": "EXECUTED",
-        "date": "2019-04-04T23:20:05.206878",
-        "operationAmount": {
-            "amount": "79114.93",
-            "currency": {
-                "name": "USD",
-                "code": "USD"
-            }
-        },
-        "description": "Перевод со счета на счет",
-        "from": "Счет 19708645243227258542",
-        "to": "Счет 75651667383060284188"
-    }
+def get_executed_transactions(json_data):
+    transaction_dict = {}
+    for item in  json_data:
+        try:
+            if item["state"]=="EXECUTED":
+                transaction_dict[ item["date"] ] = item
+        except:
+            pass
+    return transaction_dict
 
-    print(construct_transaction(item))
+
+def main():
+    json_data = [
+        {'date': '2019-10-01', 'state': 'EXECUTED'},
+        {'date': '2010-01-01', 'state': 'CANCELED'}
+    ]
+    print(get_executed_transactions(json_data))
 

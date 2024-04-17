@@ -76,9 +76,10 @@ def get_executed_transactions(json_data):
 
 
 def main():
-    json_data = [
-        {'date': '2019-10-01', 'state': 'EXECUTED'},
-        {'date': '2010-01-01', 'state': 'CANCELED'}
-    ]
-    print(get_executed_transactions(json_data))
+    json_data = load_operations(filename="operations.json")
+    transaction_dict = get_executed_transactions(json_data)
+    for selected_date in get_sorted_top( list(transaction_dict.keys()) ):
+        item = transaction_dict[selected_date]
+        transaction = construct_transaction(item)
+        print(format_transaction(transaction))
 

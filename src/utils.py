@@ -30,6 +30,14 @@ def format_hide_transaction_from(text: str):
             [transaction_from_hide[0 + 4 * i:4 + 4 * i] for i in range(0, int(len(transaction_from_hide) / 4), 1)])
 
 
+def format_hide_transaction_to(text: str):
+    transaction_to = text.split(" ")[-1]
+    transaction_prefix = " ".join(text.split(" ")[0:-1]) + " "
+    transaction_to_hide = "*" * (len(transaction_to) - 4) + transaction_to[-4:]
+    # print(transaction_to)
+    return transaction_prefix + transaction_to_hide
+
+
 def main():
-    print(format_hide_transaction_from("Visa Classic 2842878893689012"))
+    print(format_hide_transaction_to("Счет 90424923579946435907"))
 

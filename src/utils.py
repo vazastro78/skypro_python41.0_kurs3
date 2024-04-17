@@ -48,7 +48,38 @@ def format_transaction(transaction: dict):
 def get_sorted_top(keys,amount=5):
     return sorted( list(keys),  reverse=True)[0:amount]
 
+def construct_transaction(item: dict):
+        transaction = {}
+        transaction["date_formated"] = format_date(item["date"])
+        try:
+            transaction["from_hide"] = format_hide_transaction_from(item["from"])
+        except:
+            transaction["from_hide"] = "неизвестный отправитель"
+        try:
+            transaction["to_hide"] = format_hide_transaction_to(item["to"])
+        except:
+            transaction["to_hide"] = "неизвестный получатель"
+        transaction["description"] = item["description"]
+        transaction["sum"] = item["operationAmount"]["amount"] + " " + item["operationAmount"]["currency"]["name"]
+        return transaction
+
 
 def main():
-    print(get_sorted_top([0,9,10,2,1,5]))
+    item = {
+        "id": 142264268,
+        "state": "EXECUTED",
+        "date": "2019-04-04T23:20:05.206878",
+        "operationAmount": {
+            "amount": "79114.93",
+            "currency": {
+                "name": "USD",
+                "code": "USD"
+            }
+        },
+        "description": "Перевод со счета на счет",
+        "from": "Счет 19708645243227258542",
+        "to": "Счет 75651667383060284188"
+    }
+
+    print(construct_transaction(item))
 

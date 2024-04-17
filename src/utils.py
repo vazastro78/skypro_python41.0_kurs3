@@ -37,7 +37,17 @@ def format_hide_transaction_to(text: str):
     # print(transaction_to)
     return transaction_prefix + transaction_to_hide
 
+def format_transaction(transaction: dict):
+        return """
+{date_formated} {description}
+{from_hide} -> {to_hide}
+{sum}
+
+""".format(**transaction)
+
 
 def main():
-    print(format_hide_transaction_to("Счет 90424923579946435907"))
+    item = {'date_formated': '08.12.2019', 'from_hide': 'неизвестный отправитель',
+            'to_hide': 'Счет ****************5907', 'description': 'Открытие вклада', 'sum': '41096.24 USD'}
+    print(format_transaction(item))
 

@@ -45,9 +45,10 @@ def format_transaction(transaction: dict):
 
 """.format(**transaction)
 
+def get_sorted_top(keys,amount=5):
+    return sorted( list(keys),  reverse=True)[0:amount]
+
 
 def main():
-    item = {'date_formated': '08.12.2019', 'from_hide': 'неизвестный отправитель',
-            'to_hide': 'Счет ****************5907', 'description': 'Открытие вклада', 'sum': '41096.24 USD'}
-    print(format_transaction(item))
+    print(get_sorted_top([0,9,10,2,1,5]))
 

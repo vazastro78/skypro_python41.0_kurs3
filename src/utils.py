@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime
+import json
+import os
 
 
 '''
@@ -14,6 +16,14 @@ def format_date(text: str):
     return dt.strftime("%d.%m.%Y")
 
 
+def load_operations(filename="operations.json", datadir="data"):
+    operations = {}
+    full_filename = os.path.join(".", datadir, filename)
+    with open(full_filename) as fp:
+        json_data = json.load(fp)
+    return json_data
+
+
 def main():
-    print(format_date("2019-12-08T22:46:21.935582"))
+    print(load_operations(filename="operations.json"))
 

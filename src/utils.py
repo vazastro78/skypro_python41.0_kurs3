@@ -6,12 +6,12 @@ import json
 import os
 
 
-'''
-Функция принимает на входе строку, которая представляет собой iso запись даты,
-на выходе преобразует в вид 23.02.2019
-использует библиотеку datetime
-'''
 def format_date(text: str):
+    '''
+    Функция принимает на входе строку, которая представляет собой iso запись даты,
+    на выходе преобразует в вид 23.02.2019
+    использует библиотеку datetime
+    '''
     dt = datetime.fromisoformat(text)
     return dt.strftime("%d.%m.%Y")
 
@@ -33,7 +33,7 @@ def format_hide_transaction_from(text: str):
 def format_hide_transaction_to(text: str):
     transaction_to = text.split(" ")[-1]
     transaction_prefix = " ".join(text.split(" ")[0:-1]) + " "
-    transaction_to_hide = "*" * (len(transaction_to) - 4) + transaction_to[-4:]
+    transaction_to_hide = "**" + transaction_to[-4:]
     # print(transaction_to)
     return transaction_prefix + transaction_to_hide
 
